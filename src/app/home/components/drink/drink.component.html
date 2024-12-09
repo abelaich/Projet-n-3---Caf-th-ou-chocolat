@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Choose your drink</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Sélecteur de boisson -->
+  <ion-item>
+    <ion-label>Drink</ion-label>
+    <ion-select [(ngModel)]="selectedDrink" (ionChange)="updateTotal()">
+      <ion-select-option *ngFor="let drink of drinks" [value]="drink">
+        {{ drink.name }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-content>

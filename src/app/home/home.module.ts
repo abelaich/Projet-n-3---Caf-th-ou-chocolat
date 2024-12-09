@@ -7,7 +7,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { DrinkRepository } from './repository/drink-repository';
 import { DrinkRepositoryDummyImplService } from './repository/drink-repository-dummy-impl.service';
-import { DrinkService } from './components/drink.service';
+import { DrinkComponent } from './components/drink/drink.component';
 
 
 @NgModule({
@@ -17,7 +17,7 @@ import { DrinkService } from './components/drink.service';
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage, DrinkService],
+  declarations: [HomePage, DrinkComponent],
 
   providers: [{
     provide : DrinkRepository, 

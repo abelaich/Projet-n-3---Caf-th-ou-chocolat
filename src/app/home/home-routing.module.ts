@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomePage } from './home.page';
+import { DrinkComponent } from './components/drink/drink.component';
 
 const routes: Routes = [
   {
+    path: 'drink',
+    component: DrinkComponent,
+  },
+
+  {
     path: '',
-    component: HomePage,
-  }
+    redirectTo: 'drink',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
