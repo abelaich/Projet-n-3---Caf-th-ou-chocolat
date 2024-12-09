@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
+import { DrinkRepository } from './repository/drink-repository';
+import { DrinkRepositoryDummyImplService } from './repository/drink-repository-dummy-impl.service';
 
 
 @NgModule({
@@ -14,6 +16,11 @@ import { HomePageRoutingModule } from './home-routing.module';
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage],
+
+  providers: [{
+    provide : DrinkRepository, 
+    useClass : DrinkRepositoryDummyImplService,
+  }],
 })
 export class HomePageModule {}
