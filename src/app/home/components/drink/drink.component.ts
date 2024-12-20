@@ -9,7 +9,6 @@ import { PriceCalculatorService } from '../../repository/price-calculator-servic
   templateUrl: './drink.component.html',
   styleUrls: ['./drink.component.scss'],
 })
-
 export class DrinkComponent implements OnInit {
   drinks: Drink[] = [];
   selectedDrink: Drink | null = null;
@@ -38,7 +37,7 @@ export class DrinkComponent implements OnInit {
   }
 
   onSizeChange() {
-    // Mapper la valeur du slider sur l'énumération DrinkSize
+    // Mapping slider value to the DrinkSize enum
     switch (this.sliderValue) {
       case 0:
         this.selectedSize = DrinkSize.Small;
@@ -57,6 +56,7 @@ export class DrinkComponent implements OnInit {
 
   updateTotal() {
     if (this.selectedDrink) {
+      // Calculate the total price based on selected drink, size, and extras
       this.totalPrice = this.priceCalculator.calculateTotal(
         this.selectedDrink,
         this.selectedSize,
@@ -74,7 +74,8 @@ export class DrinkComponent implements OnInit {
         whippedCream: this.extras.whippedCream,
         total: this.totalPrice
       });
-  
+
+      // Navigate to the details screen and pass the parameters via queryParams
       this.router.navigate(['../details'], {
         queryParams: {
           drink: this.selectedDrink.name,
@@ -89,5 +90,4 @@ export class DrinkComponent implements OnInit {
       alert('Insufficient funds or no drink selected!');
     }
   }
-  
 }

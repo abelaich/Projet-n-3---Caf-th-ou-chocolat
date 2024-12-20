@@ -9,13 +9,20 @@
     <ion-card>
       <ion-card-content>
         <ion-item class="ion-text-center">
-            <ion-label>
-                {{ capitalizeWords(size + ' ' + drink + ' with ' + (sugar ? 'sugar' : 'no sugar') + ' and ' + (whippedCream ? 'whipped cream' : 'no whipped cream')) }}
-              </ion-label>
+          <ion-label>
+            {{ capitalizeWords(size + ' ' + drink + ' - ' +(sugar ? 'sugar' : 'no sugar') + ', ' + (whippedCream ? 'whipped cream' : 'no whipped cream')) }}
+          </ion-label>
         </ion-item>
       </ion-card-content>
     </ion-card>
-    
+  
     <!-- Inclure le composant OrderConfirmation -->
-    <app-order-confirmation #confirmationComponent [total]="total"></app-order-confirmation>
-</ion-content>
+    <app-order-confirmation 
+      [total]="total" 
+      [drink]="drink" 
+      [size]="size" 
+      [sugar]="sugar" 
+      [whippedCream]="whippedCream">
+    </app-order-confirmation>
+  </ion-content>
+  

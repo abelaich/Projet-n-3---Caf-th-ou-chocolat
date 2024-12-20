@@ -56,10 +56,21 @@ export class OrderConfirmationComponent implements OnInit {
 
     // Construction du résumé de la commande
     const drinkDetails = `${this.size} ${this.drink} - ${this.drinkPrice.toFixed(2)} EUR`;
-    const supplementDetails = this.getSupplementDetails();
+    let supplementDetails = this.getSupplementDetails();
     const totalPrice = this.calculateTotalPrice();
+    
+    if (this.sugar && this.whippedCream) {
+      supplementDetails = `Sugar (free) and Whipped Cream - 1.50 EUR`;
+    } else if (this.sugar) {
+      supplementDetails = `Sugar (free)`;
+    } else if (this.whippedCream) {
+      supplementDetails = `Whipped Cream - 1.50 EUR`;
+    } else {
+      supplementDetails = `Nothing`;
+    }
 
-    const subject = `Order Confirmation`;
+
+    const subject = `${this.capitalizeWords(this.size)} ${this.drink} - ${this.sugar ? 'Sugar' : 'No Sugar'}, ${this.whippedCream ? 'Whipped Cream' : 'No Whipped Cream'}`;
     const body = `
   Drink: ${drinkDetails}\nSupplements: ${supplementDetails}\nTotal: ${totalPrice.toFixed(2)} EUR
 `.trim();

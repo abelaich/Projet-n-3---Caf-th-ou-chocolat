@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-order-details',
@@ -8,11 +8,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 
 export class OrderDetailsComponent implements OnInit {
-  drink: string | null = null;
-  size: string | null = null;
+  drink: string = ''; // Default to empty string instead of null
+  size: string = ''; // Default to empty string instead of null
   sugar: boolean = false;
   whippedCream: boolean = false;
-  total: number = 0; // Change type to number and set a default value
+  total: number = 0;
 
   constructor(private route: ActivatedRoute) {}
 
@@ -20,8 +20,8 @@ export class OrderDetailsComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params) {
         console.log('Received params:', params);
-        this.drink = params['drink'];
-        this.size = params['size'];
+        this.drink = params['drink'] || ''; // Use empty string if null
+        this.size = params['size'] || ''; // Use empty string if null
         this.sugar = params['sugar'] === 'true'; // Convert string 'true' to boolean
         this.whippedCream = params['whippedCream'] === 'true'; // Convert string 'true' to boolean
         this.total = Number(params['total']) || 0; // Convert string to number with a fallback
@@ -35,4 +35,3 @@ export class OrderDetailsComponent implements OnInit {
     return text.replace(/\b\w/g, (char) => char.toUpperCase());
   }
 }
-
