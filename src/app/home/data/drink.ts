@@ -1,4 +1,11 @@
-export interface Drink {
+export enum DrinkSize {
+    Small = 'small',
+    Medium = 'medium',
+    Large = 'large',
+  }
+  
+  export interface Drink {
     name: string;
-    prices: { small: number; medium: number; large: number };
-}
+    prices: Record<DrinkSize, number>;
+  }
+  
