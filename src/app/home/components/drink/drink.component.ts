@@ -11,28 +11,43 @@ import { PriceCalculatorService } from '../../repository/price-calculator-servic
 export class DrinkComponent implements OnInit {
   drinks: Drink[] = [];
   selectedDrink: Drink | null = null;
-  selectedSize: DrinkSize = DrinkSize.Small; // Typage avec DrinkSize
+  selectedSize: DrinkSize = DrinkSize.Small;
+  sliderValue: number = 0; // Position du slider
   extras = { sugar: false, whippedCream: false };
   totalPrice: number = 0;
   balance: number = 4.70;
   isSugarDisabled: boolean = false;
-  
 
   constructor(
-    private priceCalculator: PriceCalculatorService, // Service pour calculer le prix
-    private drinkRepository: DrinkRepository // Récupération des boissons
+    private priceCalculator: PriceCalculatorService,
+    private drinkRepository: DrinkRepository
   ) {}
 
   ngOnInit() {
     this.drinks = this.drinkRepository.drinks;
+    this.updateTotal();
   }
 
   onDrinkChange() {
-    if (this.selectedDrink && this.selectedDrink.name === 'Chocolate') {
-      this.isSugarDisabled = true;
-      this.extras.sugar = false;  
-    } else {
-      this.isSugarDisabled = false;
+    this.isSugarDisabled = this.selectedDrink?.name === 'Chocolate';
+    if (this.isSugarDisabled) this.extras.sugar = false;
+    this.updateTotal();
+  }
+
+  onSizeChange() {
+    // Mapper la valeur du slider sur l'énumération DrinkSize
+    switch (this.sliderValue) {
+      case 0:
+        this.selectedSize = DrinkSize.Small;
+        break;
+      case 1:
+        this.selectedSize = DrinkSize.Medium;
+        break;
+      case 2:
+        this.selectedSize = DrinkSize.Large;
+        break;
+      default:
+        this.selectedSize = DrinkSize.Small;
     }
     this.updateTotal();
   }
@@ -49,12 +64,10 @@ export class DrinkComponent implements OnInit {
 
   purchase() {
     if (this.balance >= this.totalPrice) {
-      this.balance -= this.totalPrice;  // Déduit le montant du total de la carte
-      alert('Purchase successful! Remaining balance: ' + this.balance.toFixed(2) + ' €');
+      this.balance -= this.totalPrice;
+      alert(`Purchase successful! Remaining balance: ${this.balance.toFixed(2)} €`);
     } else {
       alert('Insufficient funds');
     }
   }
 }
-
-
