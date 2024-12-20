@@ -1,1 +1,28 @@
-
+<ion-header>
+    <ion-toolbar>
+      <ion-title class="ion-text-center">Your Order</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <!-- Récapitulatif de la commande -->
+    <ion-card>
+      <ion-card-content>
+        <ion-item class="ion-text-center">
+            <ion-label>
+                {{ capitalizeWords(size + ' ' + drink + ' with ' + (sugar ? 'sugar' : 'no sugar') + ' and ' + (whippedCream ? 'whipped cream' : 'no whipped cream')) }}
+              </ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  
+    <!-- Bouton pour confirmer la commande -->
+    <ion-card>
+      <ion-card-content>
+        <ion-button expand="block" color="primary" (click)="confirmOrder()">
+          Order now for {{ total | currency:'EUR':'symbol' }}
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+  

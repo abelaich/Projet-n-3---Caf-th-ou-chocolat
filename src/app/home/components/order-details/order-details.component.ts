@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Drink, DrinkSize } from '../../data/drink';
+import { DrinkRepository } from '../../repository/drink-repository';
+import { PriceCalculatorService } from '../../repository/price-calculator-service.service.spec';
 
 @Component({
   selector: 'app-order-details',
   templateUrl: './order-details.component.html',
   styleUrls: ['./order-details.component.scss'],
 })
+
 export class OrderDetailsComponent implements OnInit {
   drink: string | null = null;
   size: string | null = null;
@@ -28,6 +32,15 @@ export class OrderDetailsComponent implements OnInit {
         console.log('No query parameters received.');
       }
     });
+  }
+
+  capitalizeWords(text: string): string {
+    return text.replace(/\b\w/g, (char) => char.toUpperCase());
+  }
+
+  confirmOrder() {
+    console.log("Order confirmed!");
+    // Vous pouvez ici ajouter la logique de finalisation de la commande (comme une commande API ou autre)
   }
   
   
