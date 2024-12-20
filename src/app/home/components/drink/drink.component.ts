@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Drink, DrinkSize } from '../../data/drink';
 import { DrinkRepository } from '../../repository/drink-repository';
 import { PriceCalculatorService } from '../../repository/price-calculator-service.service.spec';
@@ -20,7 +21,8 @@ export class DrinkComponent implements OnInit {
 
   constructor(
     private priceCalculator: PriceCalculatorService,
-    private drinkRepository: DrinkRepository
+    private drinkRepository: DrinkRepository,
+    private router: Router, private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -63,11 +65,28 @@ export class DrinkComponent implements OnInit {
   }
 
   purchase() {
-    if (this.balance >= this.totalPrice) {
-      this.balance -= this.totalPrice;
-      alert(`Purchase successful! Remaining balance: ${this.balance.toFixed(2)} €`);
+    if (this.selectedDrink && this.totalPrice <= this.balance) {
+      console.log('Navigating to details with params:', {
+        drink: this.selectedDrink.name,
+        size: this.selectedSize,
+        sugar: this.extras.sugar,
+        whippedCream: this.extras.whippedCream,
+        total: this.totalPrice
+      });
+  
+      this.router.navigate(['../details'], {
+        queryParams: {
+          drink: this.selectedDrink.name,
+          size: this.selectedSize,
+          sugar: this.extras.sugar,
+          whippedCream: this.extras.whippedCream,
+          total: this.totalPrice
+        },
+        relativeTo: this.route
+      });
     } else {
-      alert('Insufficient funds');
+      alert('Insufficient funds or no drink selected!');
     }
   }
+  
 }
