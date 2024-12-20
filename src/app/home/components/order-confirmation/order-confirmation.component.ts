@@ -60,11 +60,11 @@ export class OrderConfirmationComponent implements OnInit {
     const totalPrice = this.calculateTotalPrice();
     
     if (this.sugar && this.whippedCream) {
-      supplementDetails = `Sugar (free) and Whipped Cream - 1.50 EUR`;
+      supplementDetails = `Sugar (free) and Whipped Cream 1.50 EUR`;
     } else if (this.sugar) {
       supplementDetails = `Sugar (free)`;
     } else if (this.whippedCream) {
-      supplementDetails = `Whipped Cream - 1.50 EUR`;
+      supplementDetails = `Whipped Cream 1.50 EUR`;
     } else {
       supplementDetails = `Nothing`;
     }
@@ -100,8 +100,8 @@ export class OrderConfirmationComponent implements OnInit {
   // Préparer la description des suppléments
   getSupplementDetails(): string {
     const supplements: string[] = [];
-    if (this.sugar) supplements.push(`Sugar - 0 EUR`); 
-    if (this.whippedCream) supplements.push(`Whipped cream - 1.50 EUR`);
+    if (this.sugar) supplements.push(`Sugar (free)`); 
+    if (this.whippedCream) supplements.push(`Whipped cream 1.50 EUR`);
     if (supplements.length === 0) supplements.push('No supplements');
     return supplements.join(', ');
   }
