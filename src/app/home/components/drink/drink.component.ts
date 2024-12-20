@@ -14,6 +14,8 @@ export class DrinkComponent implements OnInit {
   selectedSize: DrinkSize = DrinkSize.Small; // Typage avec DrinkSize
   extras = { sugar: false, whippedCream: false };
   totalPrice: number = 0;
+  balance: number = 4.70;
+  
 
   constructor(
     private priceCalculator: PriceCalculatorService, // Service pour calculer le prix
@@ -35,10 +37,11 @@ export class DrinkComponent implements OnInit {
   }
 
   purchase() {
-    if (this.totalPrice > 0) {
-      console.log(`Purchased ${this.selectedDrink?.name} for $${this.totalPrice}`);
+    if (this.balance >= this.totalPrice) {
+      this.balance -= this.totalPrice;  // Déduit le montant du total de la carte
+      alert('Purchase successful! Remaining balance: ' + this.balance.toFixed(2) + ' €');
     } else {
-      console.log('Please select a drink and size.');
+      alert('Insufficient funds');
     }
   }
 }
