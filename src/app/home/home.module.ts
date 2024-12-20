@@ -10,11 +10,12 @@ import { DrinkRepositoryDummyImplService } from './repository/drink-repository-d
 import { PriceCalculatorService } from './repository/price-calculator-service.service.spec';
 import { DrinkComponent } from './components/drink/drink.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { OrderConfirmationComponent } from './components/order-confirmation/order-confirmation.component';
 
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, HomePageRoutingModule],
-  declarations: [HomePage, DrinkComponent, OrderDetailsComponent],
+  declarations: [HomePage, DrinkComponent, OrderDetailsComponent, OrderConfirmationComponent],
   providers: [
     {
       provide: DrinkRepository,
