@@ -95,6 +95,12 @@
       <ion-item>
         <ion-label class="ion-text-right">{{ balance | currency:'EUR':'symbol' }} on your card</ion-label>
       </ion-item>
+      <!-- Message d'alerte -->
+      <ion-item *ngIf="totalPrice > balance">
+        <ion-label class="ion-text-center alert-text" color="danger">
+          Insufficient funds! Please top up your card.
+        </ion-label>
+      </ion-item>
     </ion-card-content>
   </ion-card>
 
