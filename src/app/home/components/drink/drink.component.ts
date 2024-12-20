@@ -15,6 +15,7 @@ export class DrinkComponent implements OnInit {
   extras = { sugar: false, whippedCream: false };
   totalPrice: number = 0;
   balance: number = 4.70;
+  isSugarDisabled: boolean = false;
   
 
   constructor(
@@ -24,6 +25,16 @@ export class DrinkComponent implements OnInit {
 
   ngOnInit() {
     this.drinks = this.drinkRepository.drinks;
+  }
+
+  onDrinkChange() {
+    if (this.selectedDrink && this.selectedDrink.name === 'Chocolate') {
+      this.isSugarDisabled = true;
+      this.extras.sugar = false;  
+    } else {
+      this.isSugarDisabled = false;
+    }
+    this.updateTotal();
   }
 
   updateTotal() {
@@ -45,3 +56,5 @@ export class DrinkComponent implements OnInit {
     }
   }
 }
+
+
